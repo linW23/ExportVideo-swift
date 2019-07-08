@@ -5,16 +5,16 @@
 设置videoOutputSetting 来设置导出视频的参数
 
            let videoOutputSetting = {
-                  let compressionSettings: [String: Any] = [
+                    let compressionSettings: [String: Any] = [
                         AVVideoAverageNonDroppableFrameRateKey: frameRate, //平均包含不可丢弃的帧率数量
                         AVVideoAverageBitRateKey: bitrate, //视频比特率
                         AVVideoMaxKeyFrameIntervalKey: 30, //帧率
                         AVVideoProfileLevelKey: AVVideoProfileLevelH264HighAutoLevel //编码格式
                     ]
-                    
+                    //此处导出分辨率可以自定义(无论原视频是竖或横向的视频, 导出后到转成属竖向视频)
                     var videoSettings: [String : Any] = [
                         AVVideoWidthKey: 540, //分辨率压缩到 540 * 960 
-                        AVVideoHeightKey: 960,
+                        AVVideoHeightKey: 960, 
                         AVVideoCompressionPropertiesKey: compressionSettings
                     ]
                     if #available(iOS 11.0, *) {
@@ -27,7 +27,7 @@
                     
 设置audioOutputSetting 来设置导出时中音频参数
 
-               let audioOutputSetting = {               
+             let audioOutputSetting = {               
                     var stereoChannelLayout = AudioChannelLayout()
                     memset(&stereoChannelLayout, 0, MemoryLayout<AudioChannelLayout>.size)
                     stereoChannelLayout.mChannelLayoutTag = kAudioChannelLayoutTag_Stereo
@@ -41,5 +41,8 @@
                         AVNumberOfChannelsKey: 2
                     ]
                     return compressionAudioSettings
-                  }()
+             }()
+              
+                
+               
                   
